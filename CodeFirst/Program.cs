@@ -11,7 +11,7 @@ configurationBuilder.AddJsonFile("config.json");
 var serviceCollection = new ServiceCollection();
 
 serviceCollection.AddSingleton<IConfiguration>(provider => configurationBuilder.Build());
-serviceCollection.AddDbContext<ApplicationDbContext>();
+serviceCollection.AddDbContext<ApplicationDbContext>(ServiceLifetime.Transient);
 serviceCollection.AddTransient<IAccountManager, DbAccountManager>();
 
 var provider = serviceCollection.BuildServiceProvider();
@@ -32,7 +32,7 @@ var accountManager = provider.GetService<IAccountManager>()!;
         Login = "Login2",
         IsBlocked = false,
         RegistrationDate = DateTime.Now,
-        PasswordHash = hasher.HashString("zxcvbnm")
+        PasswordHash = hasher.HashString("qwerty")
     };
 
     accountManager.Add(account);
