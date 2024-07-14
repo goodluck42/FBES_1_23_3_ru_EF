@@ -1,0 +1,35 @@
+﻿<Window x:Class="DIWpfApp.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:vm="clr-namespace:DIWpfApp.ViewModels"
+        xmlns:v="clr-namespace:DIWpfApp.Views"
+        mc:Ignorable="d"
+        Title="MainView" Height="450" Width="800">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:CounterViewModel}">
+            <v:CounterView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:FormatterViewModel}">
+            <v:FormatterView />
+        </DataTemplate>
+    </Window.Resources>
+    <Grid ShowGridLines="True">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="0.25*" />
+        </Grid.RowDefinitions>
+        <ContentControl Content="{Binding CurrentViewModel}" />
+        <Grid Grid.Row="1" ShowGridLines="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0"
+                    Content="Open Counter View"
+                    Command="{Binding OpenCounterViewCommand}" />
+            <Button Grid.Column="1" Content="Open Formatter View" Command="{Binding OpenFormatterViewCommand}" />
+        </Grid>
+    </Grid>
+</Window>
