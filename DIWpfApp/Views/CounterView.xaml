@@ -15,7 +15,6 @@
         <StackPanel Grid.Row="1">
             <Button Content="+" Command="{Binding IncreaseCounterCommand}"/>
             <Button Content="-"/>
-            <Button Content="-"/>
         </StackPanel>
     </Grid>
 </UserControl>
