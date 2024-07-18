@@ -48,11 +48,9 @@ using System.Reflection;
     }
     
     addAccountMethodInfo.Invoke(_this, [accToAdd]);
-
-
+    
     var displayMethodInfo = accountStorageType.GetMethod("Display", BindingFlags.Instance | BindingFlags.NonPublic |  BindingFlags.InvokeMethod)!;
-
-
+    
     displayMethodInfo.Invoke(_this, null);
 }
 
