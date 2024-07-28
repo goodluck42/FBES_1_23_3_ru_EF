@@ -1,3 +1,4 @@
 ﻿{
-  "MSSqlServerConnectionString": "Server=localhost,1433;Database=ItBottleRemake;Trusted_Connection=True;TrustServerCertificate=True;"
+  "MSSqlServerConnectionStringOld": "Server=localhost,1433;Database=ItBottleRemake;Trusted_Connection=True;TrustServerCertificate=True;",
+  "MSSqlServerConnectionString": "Server=localhost,1433;Database=ItBottleRemake;User Id=MyLogin;Password=admin;TrustServerCertificate=True;"
 }

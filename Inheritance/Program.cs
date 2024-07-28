@@ -1,8 +1,8 @@
-﻿global using EagerAndExplicitAndLazyLoading.Extensions;
+﻿global using Inheritance.Extensions;
 using Microsoft.EntityFrameworkCore;
-using EagerAndExplicitAndLazyLoading.Data;
-using EagerAndExplicitAndLazyLoading.Entities;
-using EagerAndExplicitAndLazyLoading.Services;
+using Inheritance.Data;
+using Inheritance.Entities;
+using Inheritance.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -189,4 +189,37 @@ var provider = serviceCollection.BuildServiceProvider();
 	// // ...
 	//
 	// dbContext.ChangeTracker.LazyLoadingEnabled = true;
+}
+
+{ 
+	using var scope = provider.CreateScope();
+	using var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+	var hasher = new SHA256Hasher();
+	
+	dbContext.Accounts.Add(new Account
+	{
+		Login = "myLogin1",
+		PasswordHash = hasher.HashString("qwerty"),
+		IsBlocked = false
+	});
+
+	dbContext.ModeratorAccounts.Add(new ModeratorAccount
+	{
+		Login = "myLogin2",
+		PasswordHash = hasher.HashString("qwerty"),
+		IsBlocked = false,
+		Level = 100
+	});
+	
+	dbContext.AdminAccounts.Add(new AdminAccount
+	{
+		Login = "myLogin3",
+		PasswordHash = hasher.HashString("qwerty"),
+		IsBlocked = false,
+		IsOwner = true
+	});
+
+	dbContext.SaveChanges();
+
+	//var adminAccounts = dbContext.AdminAccounts.ToList();
 }
